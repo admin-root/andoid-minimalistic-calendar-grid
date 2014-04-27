@@ -9,5 +9,6 @@
     <string name="add_event">Add New Event</string>
     <string name="reload">Reload</string>
     <string name="calendar_display_name">Calendar</string>
+    <string name="reminder">Reminder</string>
 
 </resources>

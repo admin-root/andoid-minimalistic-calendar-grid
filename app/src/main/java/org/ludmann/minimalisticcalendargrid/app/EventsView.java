@@ -31,16 +31,17 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
      * The event fields to query.
      */
     private static final String[] EVENTS_PROJECTION = new String[]{
-            CalendarContract.Events._ID,                // 0
-            CalendarContract.Events.TITLE,              // 1
-            CalendarContract.Events.EVENT_LOCATION,     // 2
-            CalendarContract.Events.DTSTART,            // 3
-            CalendarContract.Events.DTEND,              // 4
-            CalendarContract.Events.ALL_DAY,            // 5
-            CalendarContract.Events.DELETED,            // 6
-            CalendarContract.Events.VISIBLE,            // 7
-            CalendarContract.Events.DISPLAY_COLOR,        // 8
-            CalendarContract.Events.CALENDAR_DISPLAY_NAME   // 9
+            CalendarContract.Events._ID,                    // 0
+            CalendarContract.Events.TITLE,                  // 1
+            CalendarContract.Events.EVENT_LOCATION,         // 2
+            CalendarContract.Events.DTSTART,                // 3
+            CalendarContract.Events.DTEND,                  // 4
+            CalendarContract.Events.ALL_DAY,                // 5
+            CalendarContract.Events.DELETED,                // 6
+            CalendarContract.Events.VISIBLE,                // 7
+            CalendarContract.Events.DISPLAY_COLOR,          // 8
+            CalendarContract.Events.CALENDAR_DISPLAY_NAME,  // 9
+            CalendarContract.Events.HAS_ALARM               // 10
     };
     /**
      * The selection string for the events.
@@ -183,6 +184,7 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
             events[i].visible = cursor.getInt(7) == 0 ? false : true;
             events[i].displayColor = cursor.getInt(8);
             events[i].calendarDisplayName = cursor.getString(9);
+            events[i].hasAlarm = cursor.getInt(10) == 0 ? false : true;
             ++i;
         }
 
@@ -213,6 +215,7 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
         public boolean visible;
         public int displayColor;
         public String calendarDisplayName;
+        public boolean hasAlarm;
     }
 
 
@@ -296,6 +299,13 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
             }
 
             textViewExtraInfo.setText(getString(R.string.calendar_display_name) + ": " + event.calendarDisplayName);
+
+
+            if (event.hasAlarm) {
+                convertView.findViewById(R.id.reminder).setVisibility(View.VISIBLE);
+            } else {
+                convertView.findViewById(R.id.reminder).setVisibility(View.INVISIBLE);
+            }
 
             return convertView;
         }
