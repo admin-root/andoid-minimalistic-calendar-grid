@@ -1,0 +1,74 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="CalendarWeek" parent="@android:style/TextAppearance.Small">
+        <!--<item name="android:layout_width">0dp</item>-->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <!--<item name="android:layout_weight">1</item>-->
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="ColumnHeader" parent="@android:style/TextAppearance.Small">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ColumnHeader.CalendarWeek">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="Row">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginBottom">8sp</item>
+        <item name="android:background">@drawable/eventbackground</item>
+    </style>
+
+    <style name="Row.Header">
+        <item name="android:layout_weight">0</item>
+    </style>
+
+    <style name="DayCell">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">2</item>
+        <!--<item name="android:background">#efefef</item>-->
+        <item name="android:layout_marginRight">3sp</item>
+        <item name="android:background">@drawable/alldayeventbackground</item>
+    </style>
+
+    <style name="EventEntry">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:background">@drawable/eventbackground</item>
+    </style>
+
+
+    <style name="EventEntry.AllDay">
+        <item name="android:background">@drawable/alldayeventbackground</item>
+    </style>
+
+    <style name="EventEntry.DayNumber">
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">#4fa5d5</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="EventEntry.DayNumber.LastNextMonth">
+        <item name="android:textStyle">normal</item>
+        <item name="android:background">#CAE4F2</item>
+    </style>
+
+</resources>

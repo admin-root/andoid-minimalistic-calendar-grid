@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.ludmann.simpleandroidgridcalendar.app.EventsView">
+
+    <item
+        android:id="@+id/action_add_event"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/add_event"
+        app:showAsAction="always" />
+
+</menu>

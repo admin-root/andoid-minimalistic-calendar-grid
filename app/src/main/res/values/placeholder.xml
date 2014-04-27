@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="placeholder_year">
+        <item>←</item>
+        <item>2010</item>
+        <item>2011</item>
+        <item>2013</item>
+        <item>2014</item>
+        <item>2015</item>
+        <item>2016</item>
+        <item>2017</item>
+        <item>2018</item>
+        <item>→</item>
+    </string-array>
+
+    <string name="placeholder_calendar_week_1">14</string>
+    <string name="placeholder_calendar_week_2">15</string>
+    <string name="placeholder_calendar_week_3">16</string>
+    <string name="placeholder_calendar_week_4">17</string>
+    <string name="placeholder_calendar_week_5">18</string>
+
+    <string name="placeholder_day_number_1">31</string>
+    <string name="placeholder_day_number_2">1</string>
+    <string name="placeholder_day_number_3">2</string>
+    <string name="placeholder_day_number_4">3</string>
+    <string name="placeholder_day_number_5">4</string>
+    <string name="placeholder_day_number_6">5</string>
+    <string name="placeholder_day_number_7">6</string>
+    <string name="placeholder_day_number_8">7</string>
+    <string name="placeholder_day_number_9">8</string>
+    <string name="placeholder_day_number_10">9</string>
+    <string name="placeholder_day_number_11">10</string>
+    <string name="placeholder_day_number_12">11</string>
+    <string name="placeholder_day_number_13">12</string>
+    <string name="placeholder_day_number_14">13</string>
+    <string name="placeholder_day_number_15">14</string>
+    <string name="placeholder_day_number_16">15</string>
+    <string name="placeholder_day_number_17">16</string>
+    <string name="placeholder_day_number_18">17</string>
+    <string name="placeholder_day_number_19">18</string>
+    <string name="placeholder_day_number_20">19</string>
+    <string name="placeholder_day_number_21">20</string>
+    <string name="placeholder_day_number_22">21</string>
+    <string name="placeholder_day_number_23">22</string>
+    <string name="placeholder_day_number_24">23</string>
+    <string name="placeholder_day_number_25">24</string>
+    <string name="placeholder_day_number_26">25</string>
+    <string name="placeholder_day_number_27">26</string>
+    <string name="placeholder_day_number_28">27</string>
+    <string name="placeholder_day_number_29">28</string>
+    <string name="placeholder_day_number_30">29</string>
+    <string name="placeholder_day_number_31">30</string>
+    <string name="placeholder_day_number_32">1</string>
+    <string name="placeholder_day_number_33">2</string>
+    <string name="placeholder_day_number_34">3</string>
+    <string name="placeholder_day_number_35">4</string>
+
+    <string name="placeholder_event_1">C-Level Meeting</string>
+    <string name="placeholder_event_2">Lunch</string>
+    <string name="placeholder_event_3">Dinner</string>
+    <string name="placeholder_event_4">Hang out</string>
+</resources>

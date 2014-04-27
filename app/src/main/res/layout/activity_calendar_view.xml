@@ -1,0 +1,626 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="org.ludmann.simpleandroidgridcalendar.app.CalendarView$PlaceholderFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/month_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/year_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="pickYear"
+            android:text="2014" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateOnly="true" />
+
+        <!--
+        Button moved to menu.
+        <Button
+            android:id="@+id/jump_to_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="jumpToNow"
+            android:text="@string/jump_to_now"
+            android:drawableLeft="@android:drawable/ic_menu_today"
+            android:visibility="invisible" />
+        -->
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TableRow
+            android:id="@+id/weekday_names_row"
+            style="@style/Row.Header">
+
+            <TextView
+                android:id="@+id/calendar_week"
+                style="@style/ColumnHeader.CalendarWeek"
+                android:text="@string/calendar_week_short" />
+
+            <TextView
+                android:id="@+id/monday"
+                style="@style/ColumnHeader"
+                android:text="@string/monday_short" />
+
+            <TextView
+                android:id="@+id/tuesday"
+                style="@style/ColumnHeader"
+                android:text="@string/tuesday_short" />
+
+            <TextView
+                android:id="@+id/wednesday"
+                style="@style/ColumnHeader"
+                android:text="@string/wednesday_short" />
+
+            <TextView
+                android:id="@+id/thursday"
+                style="@style/ColumnHeader"
+                android:text="@string/thursday_short" />
+
+            <TextView
+                android:id="@+id/friday"
+                style="@style/ColumnHeader"
+                android:text="@string/friday_short" />
+
+            <TextView
+                android:id="@+id/saturday"
+                style="@style/ColumnHeader"
+                android:text="@string/saturday_short" />
+
+            <TextView
+                android:id="@+id/sunday"
+                style="@style/ColumnHeader"
+                android:text="@string/sunday_short" />
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/row_1"
+            style="@style/Row">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CalendarWeek"
+                    android:text="@string/placeholder_calendar_week_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:onClick="dayClick"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber.LastNextMonth"
+                    android:text="@string/placeholder_day_number_1" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_2" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_3" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_4" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_5" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_6" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_7" />
+
+            </LinearLayout>
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/row_2"
+            style="@style/Row">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CalendarWeek"
+                    android:text="@string/placeholder_calendar_week_2" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_8" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_9" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_11" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_12" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_13" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_14" />
+
+
+            </LinearLayout>
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/row_3"
+            style="@style/Row">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CalendarWeek"
+                    android:text="@string/placeholder_calendar_week_3" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_15" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_17" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_18" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_19" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_21" />
+
+            </LinearLayout>
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/row_4"
+            style="@style/Row">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CalendarWeek"
+                    android:text="@string/placeholder_calendar_week_4" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_22" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_23" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_25" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_26" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_27" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_28" />
+
+            </LinearLayout>
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/row_5"
+            style="@style/Row">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CalendarWeek"
+                    android:text="@string/placeholder_calendar_week_5" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_29" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_30" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_31" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber.LastNextMonth"
+                    android:text="@string/placeholder_day_number_32" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber.LastNextMonth"
+                    android:text="@string/placeholder_day_number_33" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber.LastNextMonth"
+                    android:text="@string/placeholder_day_number_34" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber.LastNextMonth"
+                    android:text="@string/placeholder_day_number_35" />
+
+            </LinearLayout>
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/row_6"
+            style="@style/Row">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CalendarWeek"
+                    android:text="@string/placeholder_calendar_week_5" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_29" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_30" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber"
+                    android:text="@string/placeholder_day_number_31" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber.LastNextMonth"
+                    android:text="@string/placeholder_day_number_32" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber.LastNextMonth"
+                    android:text="@string/placeholder_day_number_33" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber.LastNextMonth"
+                    android:text="@string/placeholder_day_number_34" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DayCell"
+
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/EventEntry.DayNumber.LastNextMonth"
+                    android:text="@string/placeholder_day_number_35" />
+
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
