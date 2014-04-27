@@ -8,6 +8,7 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.view.LayoutInflater;
@@ -31,33 +32,22 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
      * The event fields to query.
      */
     private static final String[] EVENTS_PROJECTION = new String[]{
-            CalendarContract.Events._ID,                    // 0
-            CalendarContract.Events.TITLE,                  // 1
-            CalendarContract.Events.EVENT_LOCATION,         // 2
-            CalendarContract.Events.DTSTART,                // 3
-            CalendarContract.Events.DTEND,                  // 4
-            CalendarContract.Events.ALL_DAY,                // 5
-            CalendarContract.Events.DELETED,                // 6
-            CalendarContract.Events.VISIBLE,                // 7
-            CalendarContract.Events.DISPLAY_COLOR,          // 8
-            CalendarContract.Events.CALENDAR_DISPLAY_NAME,  // 9
-            CalendarContract.Events.HAS_ALARM               // 10
+            CalendarContract.Instances.EVENT_ID,               // 0
+            CalendarContract.Instances.TITLE,                  // 1
+            CalendarContract.Instances.EVENT_LOCATION,         // 2
+            CalendarContract.Instances.BEGIN,                  // 3
+            CalendarContract.Instances.END,                    // 4
+            CalendarContract.Instances.ALL_DAY,                // 5
+            CalendarContract.Instances.VISIBLE,                // 6
+            CalendarContract.Instances.DISPLAY_COLOR,          // 7
+            CalendarContract.Instances.CALENDAR_DISPLAY_NAME,  // 8
+            CalendarContract.Instances.HAS_ALARM               // 9
     };
     /**
      * The selection string for the events.
-     * dtstart <= end timestamp
-     * AND
-     * dtend >= start timestamp
-     * AND
-     * visible = true
-     * AND
-     * deleted = false
      */
-    private static final String EVENTS_SELECTION = "(" +
-            CalendarContract.Events.DTSTART + " <= ?) AND (" +
-            CalendarContract.Events.DTEND + " >= ?) AND (" +
-            CalendarContract.Events.VISIBLE + "=1) AND (" +
-            CalendarContract.Events.DELETED + "=0)";
+    private static final String EVENTS_SELECTION =
+            CalendarContract.Instances.VISIBLE + "=1";
     /**
      * start timestamp key for bundle
      */
@@ -89,6 +79,8 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
 
                 Intent calIntent = new Intent(Intent.ACTION_VIEW);
                 calIntent.setData(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.id));
+                calIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.dtstart);
+                calIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.dtend);
                 startActivity(calIntent);
             }
         });
@@ -161,8 +153,11 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
 
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
-        String[] selectionArgs = new String[]{String.valueOf(bundle.getLong(END_TS)), String.valueOf(bundle.getLong(START_TS))};
-        return new CursorLoader(this, CalendarContract.Events.CONTENT_URI, EVENTS_PROJECTION, EVENTS_SELECTION, selectionArgs, CalendarContract.Events.DTSTART + " ASC");
+        //String[] selectionArgs = new String[]{String.valueOf(bundle.getLong(END_TS)), String.valueOf(bundle.getLong(START_TS))};
+        Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
+        ContentUris.appendId(builder, bundle.getLong(START_TS));
+        ContentUris.appendId(builder, bundle.getLong(END_TS));
+        return new CursorLoader(this, builder.build(), EVENTS_PROJECTION, EVENTS_SELECTION, null, CalendarContract.Instances.BEGIN + " ASC");
     }
 
     @Override
@@ -179,11 +174,10 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
             events[i].dtstart = cursor.getLong(3);
             events[i].dtend = cursor.getLong(4);
             events[i].allDay = cursor.getInt(5) == 0 ? false : true;
-            events[i].deleted = cursor.getInt(6) == 0 ? false : true;
-            events[i].visible = cursor.getInt(7) == 0 ? false : true;
-            events[i].displayColor = cursor.getInt(8);
-            events[i].calendarDisplayName = cursor.getString(9);
-            events[i].hasAlarm = cursor.getInt(10) == 0 ? false : true;
+            events[i].visible = cursor.getInt(6) == 0 ? false : true;
+            events[i].displayColor = cursor.getInt(7);
+            events[i].calendarDisplayName = cursor.getString(8);
+            events[i].hasAlarm = cursor.getInt(9) == 0 ? false : true;
             ++i;
         }
 
@@ -210,7 +204,6 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
         public long dtstart;
         public long dtend;
         public boolean allDay;
-        public boolean deleted;
         public boolean visible;
         public int displayColor;
         public String calendarDisplayName;
@@ -240,12 +233,21 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
 
 
             Calendar start = Calendar.getInstance();
-            // dtstart is in UTC
-            start.setTimeInMillis(event.dtstart - TimeZone.getDefault().getOffset(event.dtstart));
+            if (event.allDay) {
+                // TODO: This works, but is this correct? Why is the time only at all day events shifted?
+                // dtstart is in UTC
+                start.setTimeInMillis(event.dtstart - TimeZone.getDefault().getOffset(event.dtstart));
+            } else {
+                start.setTimeInMillis(event.dtstart /*- TimeZone.getDefault().getOffset(event.dtstart)*/);
+            }
             Calendar end = Calendar.getInstance();
-            // dtend is in UTC
-            end.setTimeInMillis(event.dtend - TimeZone.getDefault().getOffset(event.dtend));
-
+            if (event.allDay) {
+                // TODO: This works, but is this correct? Why is the time only at all day events shifted?
+                // dtend is in UTC
+                end.setTimeInMillis(event.dtend - TimeZone.getDefault().getOffset(event.dtend));
+            } else {
+                end.setTimeInMillis(event.dtend /*- TimeZone.getDefault().getOffset(event.dtend)*/);
+            }
 
             Calendar startOfDay = Calendar.getInstance();
             //startOfDay.setTimeZone(TimeZone.getTimeZone("UTC"));

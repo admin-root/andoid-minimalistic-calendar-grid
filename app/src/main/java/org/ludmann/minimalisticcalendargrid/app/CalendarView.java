@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v4.view.GestureDetectorCompat;
@@ -41,56 +43,27 @@ import java.util.Calendar;
 public class CalendarView extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     /**
-     * The calendar fields to query.
-     */
-    private static final String[] CALENDAR_PROJECTION = new String[]{
-            CalendarContract.Calendars._ID,
-            CalendarContract.Calendars.ACCOUNT_NAME,
-            CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
-            CalendarContract.Calendars.OWNER_ACCOUNT,
-            CalendarContract.Calendars.CALENDAR_COLOR,
-            CalendarContract.Calendars.VISIBLE
-    };
-
-    /**
      * The event fields to query.
      */
     private static final String[] EVENTS_PROJECTION = new String[]{
-            CalendarContract.Events._ID,                // 0
-            CalendarContract.Events.TITLE,              // 1
-            CalendarContract.Events.EVENT_LOCATION,     // 2
-            CalendarContract.Events.DTSTART,            // 3
-            CalendarContract.Events.DTEND,              // 4
-            CalendarContract.Events.ALL_DAY,            // 5
-            CalendarContract.Events.DELETED,            // 6
-            CalendarContract.Events.VISIBLE,            // 7
-            CalendarContract.Events.DISPLAY_COLOR       // 8
+            CalendarContract.Instances._ID,                // 0
+            CalendarContract.Instances.TITLE,              // 1
+            CalendarContract.Instances.BEGIN,              // 2
+            CalendarContract.Instances.END,                // 3
+            CalendarContract.Instances.ALL_DAY,            // 4
+            CalendarContract.Instances.VISIBLE,            // 5
+            CalendarContract.Instances.DISPLAY_COLOR       // 6
     };
     /**
      * The selection string for the events.
-     * dtstart <= end timestamp
-     * AND
-     * dtend >= start timestamp
-     * AND
-     * visible = true
-     * AND
-     * deleted = false
      */
-    private static final String EVENTS_SELECTION = "(" +
-            CalendarContract.Events.DTSTART + " <= ?) AND (" +
-            CalendarContract.Events.DTEND + " >= ?) AND (" +
-            CalendarContract.Events.VISIBLE + "=1) AND (" +
-            CalendarContract.Events.DELETED + "=0)";
+    private static final String EVENTS_SELECTION =
+            CalendarContract.Instances.VISIBLE + "=1";
 
-
-    /**
-     * ID for the loader that reads the calendars.
-     */
-    private static final int CALENDARS_LOADER_ID = 0;
     /**
      * ID for the loader that reads the events.
      */
-    private static final int EVENTS_LOADER_ID = 1;
+    private static final int EVENTS_LOADER_ID = 0;
 
     /**
      * start timestamp key for bundle
@@ -481,13 +454,13 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
             cursor.moveToPosition(-1);
             while (cursor.moveToNext()) {
                 //System.out.println("cursor position 2: " + cursor.getPosition());
-                long dtstart = cursor.getLong(3);
-                long dtend = cursor.getLong(4);
+                long dtstart = cursor.getLong(2);
+                long dtend = cursor.getLong(3);
 
                 if (dtstart <= endOfDay && dtend >= startOfDay) {
                     String title = cursor.getString(1);
-                    boolean isAllDay = cursor.getInt(5) == 1 ? true : false;
-                    int displayColor = cursor.getInt(8);
+                    boolean isAllDay = cursor.getInt(4) == 1 ? true : false;
+                    int displayColor = cursor.getInt(6);
 
                     if (isAllDay) {
                         textView = (TextView) inflater.inflate(R.layout.event_all_day, null);
@@ -597,9 +570,6 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
         // System.out.println("CREATE LOADER");
         switch (loaderId) {
-            case CALENDARS_LOADER_ID:
-                return new CursorLoader(this, CalendarContract.Calendars.CONTENT_URI, CALENDAR_PROJECTION, null, null, null);
-
             case EVENTS_LOADER_ID:
                 findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
                 //ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -611,8 +581,10 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
                 removeAllEvents(R.id.row_5);
                 removeAllEvents(R.id.row_6);
 
-                String[] selectionArgs = new String[]{String.valueOf(bundle.getLong(END_TS)), String.valueOf(bundle.getLong(START_TS))};
-                return new CursorLoader(this, CalendarContract.Events.CONTENT_URI, EVENTS_PROJECTION, EVENTS_SELECTION, selectionArgs, CalendarContract.Events.DTSTART + " ASC");
+                Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
+                ContentUris.appendId(builder, bundle.getLong(START_TS));
+                ContentUris.appendId(builder, bundle.getLong(END_TS));
+                return new CursorLoader(this, builder.build(), EVENTS_PROJECTION, EVENTS_SELECTION, null, CalendarContract.Instances.BEGIN + " ASC");
         }
         return null;
     }
@@ -623,8 +595,6 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
         //System.out.println("LOAD FINISH");
 
         switch (loader.getId()) {
-            case CALENDARS_LOADER_ID:
-                return;
 
             case EVENTS_LOADER_ID:
                 Calendar calendar = CalendarLabels.getFirstDayOfMonth(month, year);
@@ -664,8 +634,6 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
     public void onLoaderReset(Loader<Cursor> loader) {
         //System.out.println("RESET LOADER");
         switch (loader.getId()) {
-            case CALENDARS_LOADER_ID:
-                return;
 
             case EVENTS_LOADER_ID:
                 findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
