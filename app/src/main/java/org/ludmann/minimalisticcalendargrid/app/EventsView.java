@@ -142,8 +142,7 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
                 // if not current day: send  start time
                 if (now.get(Calendar.DAY_OF_MONTH) != day || now.get(Calendar.MONTH) != month || now.get(Calendar.YEAR) != year) {
                     Calendar calendar = now;
-                    // first day of displayed month
-                    calendar.set(year, month, 1);
+                    calendar.set(year, month, day);
                     // round to next hour
                     calendar.set(Calendar.MINUTE, 0);
                     calendar.set(Calendar.SECOND, 0);
