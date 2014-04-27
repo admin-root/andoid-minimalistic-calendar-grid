@@ -8,6 +8,6 @@
     <string name="title_activity_events_view">Events</string>
     <string name="add_event">Add New Event</string>
     <string name="reload">Reload</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="calendar_display_name">Calendar</string>
 
 </resources>
