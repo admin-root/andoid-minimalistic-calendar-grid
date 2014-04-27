@@ -9,28 +9,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="org.ludmann.simpleandroidgridcalendar.app.CalendarView$PlaceholderFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:gravity="center_vertical">
 
-        <Spinner
-            android:id="@+id/month_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/year_button"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="pickYear"
-            android:text="2014" />
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/month_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/year_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="pickYear"
+                android:text="2014" />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:indeterminateOnly="true" />
 
         <!--
@@ -44,7 +51,7 @@
             android:drawableLeft="@android:drawable/ic_menu_today"
             android:visibility="invisible" />
         -->
-    </LinearLayout>
+    </RelativeLayout>
 
     <TableLayout
         android:layout_width="match_parent"
