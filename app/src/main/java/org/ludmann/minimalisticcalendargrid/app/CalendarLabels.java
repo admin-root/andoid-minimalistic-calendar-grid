@@ -63,7 +63,7 @@ public class CalendarLabels {
                 calendar.add(Calendar.DAY_OF_MONTH, d - 7);
             }
         }
-        System.out.println("FIST DAY OF MONTH " + (month + 1) + "/" + year + ": " + calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.YEAR));
+        //System.out.println("FIST DAY OF MONTH " + (month + 1) + "/" + year + ": " + calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.YEAR));
         return calendar;
     }
 
@@ -78,14 +78,14 @@ public class CalendarLabels {
         int firstDayOfWeek = calendar.getFirstDayOfWeek();
 
         int d = firstDayOfWeek - dayOfWeek;
-        System.out.println("d: " + d);
+        //System.out.println("d: " + d);
         if (d <= 0) {
             calendar.add(Calendar.DAY_OF_MONTH, d + 6);
         } else if (d > 0) {
             calendar.add(Calendar.DAY_OF_MONTH, d - 1);
         }
 
-        System.out.println("LAST DAY OF MONTH " + (month + 1) + "/" + year + ": " + calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.YEAR));
+        //System.out.println("LAST DAY OF MONTH " + (month + 1) + "/" + year + ": " + calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.YEAR));
         return calendar;
     }
 }

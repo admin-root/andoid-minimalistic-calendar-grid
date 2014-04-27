@@ -256,7 +256,6 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
         int id = item.getItemId();
         switch (id) {
             case R.id.action_settings:
-                System.out.println("settings");
                 return true;
             case R.id.action_today:
                 setMonthAndYear(Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.YEAR));
@@ -479,11 +478,7 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
             //System.out.println("cursor count " + cursor.getCount());
             //System.out.println("cursor position 1: " + cursor.getPosition());
 
-            // TODO: FIRST EVENT IS SKIPPED!!!!!
             cursor.moveToPosition(-1);
-            if (!cursor.isBeforeFirst()) {
-                System.out.println("cursor is not before first !!!!!!!!!!!!!!!!!1");
-            }
             while (cursor.moveToNext()) {
                 //System.out.println("cursor position 2: " + cursor.getPosition());
                 long dtstart = cursor.getLong(3);
@@ -600,7 +595,7 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
 
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
-        System.out.println("CREATE LOADER");
+        // System.out.println("CREATE LOADER");
         switch (loaderId) {
             case CALENDARS_LOADER_ID:
                 return new CursorLoader(this, CalendarContract.Calendars.CONTENT_URI, CALENDAR_PROJECTION, null, null, null);
@@ -625,7 +620,7 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
-        System.out.println("LOAD FINISH");
+        //System.out.println("LOAD FINISH");
 
         switch (loader.getId()) {
             case CALENDARS_LOADER_ID:
@@ -667,7 +662,7 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        System.out.println("RESET LOADER");
+        //System.out.println("RESET LOADER");
         switch (loader.getId()) {
             case CALENDARS_LOADER_ID:
                 return;
