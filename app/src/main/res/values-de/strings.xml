@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Minimalistic Calendar Grid</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="jump_to_now">Heute</string>
+    <string name="pick_year">Jahr wählen</string>
+    <string name="title_activity_events_view">Termine</string>
+    <string name="add_event">Neuen Termin hinzufügen</string>
+    <string name="reload">Neu laden</string>
+    <string name="calendar_display_name">Kalender</string>
+
+</resources>
