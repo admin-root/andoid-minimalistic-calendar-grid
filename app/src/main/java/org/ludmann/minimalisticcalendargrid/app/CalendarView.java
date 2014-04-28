@@ -394,10 +394,12 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
                 textView.setTextAppearance(this, R.style.EventEntry_DayNumber);
                 //textView.setBackgroundColor(0xffB82500);
                 textView.setBackground(getResources().getDrawable(R.drawable.daynumber_now));
+                textView.setTextColor(0xffffffff);
             } else if (calendar.get(Calendar.MONTH) != month) {
                 textView.setTextAppearance(this, R.style.EventEntry_DayNumber_LastNextMonth);
                 //textView.setBackgroundColor(0xFFCAE4F2);
                 textView.setBackground(getResources().getDrawable(R.drawable.daynumber_lastnextweek));
+                textView.setTextColor(0xff000000);
             } else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
                 textView.setTextAppearance(this, R.style.EventEntry_DayNumber);
                 //textView.setBackgroundColor(0xff00007A);
@@ -407,6 +409,7 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
                 textView.setTextAppearance(this, R.style.EventEntry_DayNumber);
                 //textView.setBackgroundColor(0xff4fa5d5);
                 textView.setBackground(getResources().getDrawable(R.drawable.daynumber));
+                textView.setTextColor(0xff000000);
             }
 
             textView.setOnClickListener(new View.OnClickListener() {
