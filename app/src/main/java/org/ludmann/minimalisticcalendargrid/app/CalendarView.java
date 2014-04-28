@@ -214,6 +214,12 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        update();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         // Inflate the menu; this adds items to the action bar if it is present.

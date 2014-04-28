@@ -99,17 +99,39 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
         calendar.set(Calendar.MINUTE, calendar.getActualMaximum(Calendar.MINUTE));
         calendar.set(Calendar.SECOND, calendar.getActualMaximum(Calendar.SECOND));
         calendar.set(Calendar.MILLISECOND, calendar.getActualMaximum(Calendar.MILLISECOND));
-        // set end timestamp to 00:00:00
         long endOfDay = calendar.getTimeInMillis();
 
         Bundle bundle = new Bundle();
         bundle.putLong(START_TS, startOfDay);
         bundle.putLong(END_TS, endOfDay);
 
-        //getLoaderManager().initLoader((int) (startOfDay / 1000L), bundle, this);
         getLoaderManager().initLoader(0, bundle, this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Update data
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        calendar.set(year, month, day, 0, 0, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        // add one millisecond: don't show events ending at midnight
+        long startOfDay = calendar.getTimeInMillis() + 1;
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getActualMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getActualMaximum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getActualMaximum(Calendar.MILLISECOND));
+        long endOfDay = calendar.getTimeInMillis();
+
+        Bundle bundle = new Bundle();
+        bundle.putLong(START_TS, startOfDay);
+        bundle.putLong(END_TS, endOfDay);
+
+        getLoaderManager().restartLoader(0, bundle, this);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
