@@ -335,9 +335,9 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
                 textView.setText("");
                 cellViewGroup.addView(textView);
             }
-        } else if (cellViewGroup.getChildCount() + 1 < maxNoEvents) {
+        } else if (cellViewGroup.getChildCount() + 1 > maxNoEvents) {
             // Remove unnecessary dummy text views
-            for (int i = maxNoEvents; i <= cellViewGroup.getChildCount(); ++i) {
+            for (int i = maxNoEvents; i < cellViewGroup.getChildCount(); ++i) {
                 cellViewGroup.removeViewAt(i);
             }
         }
@@ -516,12 +516,51 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
 
         Calendar calendar = Calendar.getInstance();
 
+        // view is the ViewGroup (LinearLayout) that holds all views of the day (day number and events)
         ViewGroup viewGroup = (ViewGroup) view;
         // TextView that holds the day
         TextView textView = (TextView) viewGroup.getChildAt(0);
-        // TODO: How to handle last and next month?
 
         int day = Integer.parseInt(textView.getText().toString());
+        int month = this.month;
+        int year = this.year;
+
+        View currentRow = ((View) view.getParent());
+        int firstRowId = R.id.row_1;
+        int lastRowId = R.id.row_6;
+        if (((ViewGroup) currentRow.getParent()).findViewById(lastRowId).getVisibility() == View.GONE) {
+            lastRowId = R.id.row_5;
+            if (((ViewGroup) currentRow.getParent()).findViewById(lastRowId).getVisibility() == View.GONE) {
+                lastRowId = R.id.row_4;
+            }
+        }
+
+        if (currentRow.getId() == firstRowId) {
+            // this is the first week
+            // maybe last month?
+            if (day > 7) {
+                System.out.println("last next");
+                if (month == calendar.getMinimum(Calendar.MONTH)) {
+                    month = calendar.getMaximum(Calendar.MONTH);
+                    --year;
+                } else {
+                    --month;
+                }
+            }
+        } else if (currentRow.getId() == lastRowId) {
+            // this is the last week
+            // maybe next month?
+            if (day < 7) {
+                System.out.println("last next");
+                if (month == calendar.getMaximum(Calendar.MONTH)) {
+                    month = calendar.getMaximum(Calendar.MONTH);
+                    ++year;
+                } else {
+                    ++month;
+                }
+            }
+        }
+
         calendar.set(year, month, day);
         intent.putExtra("calendar", calendar);
 
