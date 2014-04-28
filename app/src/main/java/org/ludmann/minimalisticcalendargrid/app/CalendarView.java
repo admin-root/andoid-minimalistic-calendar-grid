@@ -315,7 +315,7 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
     }
 
     /**
-     * It's a hack for rows with equal height. Maybe, there is a better solution ...
+     * It's a hack to get rows with equal height. Maybe, there is a better solution ...
      *
      * @param viewId
      */
@@ -327,19 +327,19 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
         LayoutInflater inflater = getLayoutInflater();
 
         final ViewGroup cellViewGroup = (ViewGroup) row.getChildAt(0);
-        //ViewGroup eventsViewGroup = (ViewGroup) ((ViewGroup) cellViewGroup.getChildAt(1)).getChildAt(0);
-        ViewGroup eventsViewGroup = cellViewGroup;
 
-        for (int i = eventsViewGroup.getChildCount() + 1; i <= maxNoEvents; ++i) {
-            TextView textView = (TextView) inflater.inflate(R.layout.event, null);
-            textView.setText("");
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dayClick(cellViewGroup);
-                }
-            });
-            eventsViewGroup.addView(textView);
+        if (cellViewGroup.getChildCount() + 1 < maxNoEvents) {
+            // Add new (empty) dummy text views.
+            for (int i = cellViewGroup.getChildCount() + 1; i <= maxNoEvents; ++i) {
+                TextView textView = (TextView) inflater.inflate(R.layout.event, null);
+                textView.setText("");
+                cellViewGroup.addView(textView);
+            }
+        } else if (cellViewGroup.getChildCount() + 1 < maxNoEvents) {
+            // Remove unnecessary dummy text views
+            for (int i = maxNoEvents; i <= cellViewGroup.getChildCount(); ++i) {
+                cellViewGroup.removeViewAt(i);
+            }
         }
     }
 
