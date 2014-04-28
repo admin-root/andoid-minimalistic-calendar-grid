@@ -317,7 +317,7 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
     /**
      * It's a hack to get rows with equal height. Maybe, there is a better solution ...
      *
-     * @param viewId
+     * @param viewId ID of the row.
      */
     private void setDummyEvents(int viewId) {
         TableRow row = (TableRow) findViewById(viewId);
@@ -352,8 +352,6 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
         TableRow row = (TableRow) findViewById(viewId);
         if (row.getVisibility() == View.GONE)
             return;
-
-        LayoutInflater inflater = getLayoutInflater();
 
         for (int childNo = 1; childNo < row.getChildCount(); ++childNo) {
             final ViewGroup cellViewGroup = (ViewGroup) row.getChildAt(childNo);
@@ -423,7 +421,7 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
             // add events of day
 
             // if there is a view group for the events: reuse it
-            ViewGroup eventsViewGroup = null;
+            ViewGroup eventsViewGroup;
             if (cellViewGroup.getChildCount() == 2) {
                 eventsViewGroup = (ViewGroup) ((ViewGroup) cellViewGroup.getChildAt(1)).getChildAt(0);
             } else {
@@ -462,7 +460,7 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
 
                 if (dtstart <= endOfDay && dtend >= startOfDay) {
                     String title = cursor.getString(1);
-                    boolean isAllDay = cursor.getInt(4) == 1 ? true : false;
+                    boolean isAllDay = cursor.getInt(4) == 1;
                     int displayColor = cursor.getInt(6);
 
                     if (isAllDay) {
@@ -627,10 +625,7 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
                 setDummyEvents(R.id.row_5);
                 setDummyEvents(R.id.row_6);
                 findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
-                return;
         }
-
-
     }
 
     @Override
@@ -648,7 +643,6 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
                 removeAllEvents(R.id.row_4);
                 removeAllEvents(R.id.row_5);
                 removeAllEvents(R.id.row_6);
-                return;
         }
     }
 
@@ -733,16 +727,20 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
                     if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                         if (diffX > 0) {
                             onSwipeRight();
+                            result = true;
                         } else {
                             onSwipeLeft();
+                            result = true;
                         }
                     }
                 } else {
                     if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
                         if (diffY > 0) {
                             onSwipeBottom();
+                            // result = true;
                         } else {
                             onSwipeTop();
+                            // result = true;
                         }
                     }
                 }

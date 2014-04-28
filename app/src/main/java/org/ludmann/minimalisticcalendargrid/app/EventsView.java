@@ -173,11 +173,11 @@ public class EventsView extends Activity implements LoaderManager.LoaderCallback
             events[i].location = cursor.getString(2);
             events[i].dtstart = cursor.getLong(3);
             events[i].dtend = cursor.getLong(4);
-            events[i].allDay = cursor.getInt(5) == 0 ? false : true;
-            events[i].visible = cursor.getInt(6) == 0 ? false : true;
+            events[i].allDay = cursor.getInt(5) != 0;
+            events[i].visible = cursor.getInt(6) != 0;
             events[i].displayColor = cursor.getInt(7);
             events[i].calendarDisplayName = cursor.getString(8);
-            events[i].hasAlarm = cursor.getInt(9) == 0 ? false : true;
+            events[i].hasAlarm = cursor.getInt(9) != 0;
             ++i;
         }
 
