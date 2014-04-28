@@ -9,12 +9,15 @@ import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -236,6 +239,25 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
         switch (id) {
             /**case R.id.action_settings:
              return true;**/
+            case R.id.action_info:
+                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                String versionName = null;
+                try {
+                    versionName = getPackageManager()
+                            .getPackageInfo(getPackageName(), 0).versionName;
+                } catch (PackageManager.NameNotFoundException e) {
+                    versionName = "";
+                }
+                final String msg = "<p>" + getString(R.string.app_name) + " " + versionName + "</p><p><small>" + getString(R.string.info_msg) +
+                        "</small></p><p><small>" + getString(R.string.project_info) + "</small></p>";
+                builder.setMessage(Html.fromHtml(msg))
+                        .setTitle(R.string.action_info)
+                        .setPositiveButton(android.R.string.ok, null);
+                final AlertDialog dialog = builder.show();
+                // Make the textview clickable. Must be called after show()
+                ((TextView) dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+                return true;
             case R.id.action_today:
                 setMonthAndYear(Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.YEAR));
                 return true;

@@ -11,5 +11,10 @@
     <string name="reload">Neu laden</string>
     <string name="calendar_display_name">Kalender</string>
     <string name="reminder">Erinnerung</string>
+    <string name="action_info">Über</string>
+    <string name="info_msg">Diese App zeigt alle deine Kalendereinträge in einem minimalistischen Gitter. Die Darstellung ist inspiriert von Jorte Kalender, da diese sehr übersichtlich ist.
+    Leider hat Jorte eine Menge Funktionen, welche ich nicht brauche und die App aufbläht. Diese App zeigt lediglich die Termine in einer Monatsansicht an, hat eine Liste aller Termine pro Tag und
+    öffnet den Standardkalender um neue Termine anzulegen oder die Termindetails anzuzeigen. Somit hat man zum Editieren der Termine die volle Funktionalität der Android-Kalender-App mit einer übersichtlicheren Monatsansicht.</string>
+    <string name="project_info">Quelltext ist unter <a href="https://code.google.com/p/andoid-minimalistic-calendar-grid/">https://code.google.com/p/andoid-minimalistic-calendar-grid/</a> erhältlich.</string>
 
 </resources>

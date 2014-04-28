@@ -11,5 +11,10 @@
     <string name="reload">Reload</string>
     <string name="calendar_display_name">Calendar</string>
     <string name="reminder">Reminder</string>
+    <string name="action_info">About</string>
+    <string name="info_msg">This app shows all your calendar events in a minimalistic grid. The view is inspired by Jorte Calendar because the month view is very clear.
+Unfortunately, Jorte comes with a lot of functionality that I do not need and blows-up the app. This app just shows your event per month, gives you an event list per day and opens the
+default celendar app for creating new events and viewing event details. So, for editing your events you have the full power of the Android calendar app with a month view that is clearer.</string>
+    <string name="project_info">Source code available at <a href="https://code.google.com/p/andoid-minimalistic-calendar-grid/">https://code.google.com/p/andoid-minimalistic-calendar-grid/</a></string>
 
 </resources>
