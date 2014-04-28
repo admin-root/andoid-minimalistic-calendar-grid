@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Row.Header">
+
+    <TextView
+        android:id="@+id/calendar_week"
+        style="@style/ColumnHeader.CalendarWeek"
+        android:text="@string/calendar_week_short" />
+
+    <TextView
+        android:id="@+id/monday"
+        style="@style/ColumnHeader"
+        android:text="@string/monday_short" />
+
+    <TextView
+        android:id="@+id/tuesday"
+        style="@style/ColumnHeader"
+        android:text="@string/tuesday_short" />
+
+    <TextView
+        android:id="@+id/wednesday"
+        style="@style/ColumnHeader"
+        android:text="@string/wednesday_short" />
+
+    <TextView
+        android:id="@+id/thursday"
+        style="@style/ColumnHeader"
+        android:text="@string/thursday_short" />
+
+    <TextView
+        android:id="@+id/friday"
+        style="@style/ColumnHeader"
+        android:text="@string/friday_short" />
+
+    <TextView
+        android:id="@+id/saturday"
+        style="@style/ColumnHeader"
+        android:text="@string/saturday_short" />
+
+    <TextView
+        android:id="@+id/sunday"
+        style="@style/ColumnHeader"
+        android:text="@string/sunday_short" />
+</TableRow>
