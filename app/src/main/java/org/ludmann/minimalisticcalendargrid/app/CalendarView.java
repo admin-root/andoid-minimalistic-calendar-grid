@@ -228,8 +228,8 @@ public class CalendarView extends ActionBarActivity implements LoaderManager.Loa
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_settings:
-                return true;
+            /**case R.id.action_settings:
+             return true;**/
             case R.id.action_today:
                 setMonthAndYear(Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.YEAR));
                 return true;
